@@ -1,37 +1,37 @@
-# 📘 Stock Bookkeeping System (C++)
+# 📘 C++ Order Book / Bookkeeping Store
 
-A lightweight and efficient **stock trading bookkeeping tool** built in **C++**, designed to track buy/sell trades, compute profit/loss using FIFO logic, and maintain portfolio statistics — all from the terminal. Ideal for traders and developers looking to understand the backend logic of trade tracking systems.
+A high-performance **C++ order book simulator** that mimics core trading mechanics of a real-world stock exchange. This system tracks buy/sell orders, matches them based on price, and prints the final order book after executing all possible trades.
 
 ---
 
 ## 🚀 Features
 
-- ✅ **Transaction Tracking** – Log buy/sell trades with price, quantity, and timestamp  
-- 💸 **PnL Calculation** – FIFO-based profit/loss computation  
-- 📊 **Portfolio Overview** – Displays average cost, holdings, and current position  
-- 🔐 **Data Validation** – Prevents invalid trades (like overselling)  
-- 💾 **File Storage (Optional)** – Save trades and restore sessions (extendable)
+- 📥 **Buy/Sell Order Management** – Handles both buy and sell sides using price-based queues  
+- ⚖️ **Order Matching Engine** – Matches orders based on price priority (highest BUY vs lowest SELL)  
+- ⏱️ **FIFO Logic** – Maintains quantity and order arrival to simulate real trading conditions  
+- 📄 **Order Book Visualization** – Displays live order book depth after matching  
+- 🆔 **Auto-Generated Order IDs** for traceability in trades
 
 ---
 
 ## 🛠 Tech Stack
 
 - **Language:** C++  
-- **Compiler:** g++  
-- **Build System:** CMake (optional)  
-- **Optional Extensions:** File I/O, unit tests, performance logging
+- **Headers/Classes:** `Order`, `OrderBook`  
+- **Compiler:** `g++`, tested with C++17  
+- **Run Mode:** Console application
 
 ---
 
-## 📂 Project Structure
+## 📂 File Structure
 
 ```
-bookkeeping/
-├── main.cpp           # Entry point
-├── Trade.hpp/.cpp     # Trade model
-├── BookKeeper.hpp/.cpp# Core logic: PnL, portfolio
-├── utils.hpp/.cpp     # (Optional) helpers
-└── README.md
+book_keeping_store/
+├── main.cpp            # Entry point – simulates various order scenarios
+├── order.hpp           # Order struct and type definitions
+├── orderBook.hpp       # OrderBook class declaration
+├── orderBook.cpp       # OrderBook class implementation
+└── orderbook.exe       # Precompiled executable (Windows)
 ```
 
 ---
@@ -39,55 +39,60 @@ bookkeeping/
 ## 🧪 Sample Output
 
 ```
-> Buy 100 shares at ₹200
-> Buy 50 shares at ₹220
-> Sell 80 shares at ₹250
+Trade executed: Buy ID 1 <--> Sell ID 3 | Qty: 10 @ Price: 100.5
+Trade executed: Buy ID 4 <--> Sell ID 5 | Qty: 5 @ Price: 98.0
+...
+=== Order Book ===
+SELL Orders:
+102.0 -> 1 order(s)
+103.5 -> 2 order(s)
 
-Profit: ₹4,000  
-Holdings: 70 shares @ Avg ₹210
+BUY Orders:
+99.0 -> 1 order(s)
+98.5 -> 2 order(s)
+==================
 ```
 
 ---
 
-## 🖥️ How to Run
+## ▶️ How to Compile & Run
 
-### 🔧 Prerequisites
-- C++ compiler (`g++`)
-- CMake (optional for larger setups)
-
-### ▶️ Compile and Run (Basic)
+### Prerequisite
+Make sure you have `g++` installed. On Linux or WSL:
 ```bash
-g++ main.cpp -o bookkeeping
-./bookkeeping
+sudo apt update && sudo apt install g++
 ```
 
-### 🧱 Compile with CMake (Optional)
+### Compile:
 ```bash
-mkdir build && cd build
-cmake ..
-make
-./bookkeeping
+g++ main.cpp orderBook.cpp -o orderbook
+```
+
+### Run:
+```bash
+./orderbook
+```
+
+On Windows (with MinGW):
+```bash
+g++ main.cpp orderBook.cpp -o orderbook.exe
+orderbook.exe
 ```
 
 ---
 
 ## 📌 Future Enhancements
-- File-based transaction history
-- GUI version with Qt or Python frontend
-- Real-time price integration via APIs
-- CSV/Excel export
 
----
-
-## 🤝 Contributing
-
-Feel free to fork the repo and open PRs! Suggestions, bug reports, or improvements are welcome.
+- Live price feed or real-time matching via threads  
+- File input/output for trade history logging  
+- Advanced matching rules (time-priority, IOC/FOK orders)  
+- GUI order book visualizer using Qt or Python
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
